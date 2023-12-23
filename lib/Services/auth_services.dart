@@ -28,7 +28,7 @@ class AuthServices {
       "password": password,
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'v1/login');
+    var url = Uri.parse(baseURL + 'login');
     http.Response response = await http.post(
       url,
       headers: headers,
@@ -45,6 +45,54 @@ class AuthServices {
     var body = json.encode(data);
     var url = Uri.parse(baseURL + 'products');
     http.Response response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+    print(response.body);
+    return response;
+  }
+
+  static Future<http.Response> getproduct(String name, String detail) async {
+    Map data = {
+      "name": name,
+      "detail": detail,
+    };
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + 'products');
+    http.Response response = await http.get(
+      url,
+      headers: headers,
+    );
+    print(response.body);
+    return response;
+  }
+
+  static Future<http.Response> updateproduct(int id,String name, String detail) async {
+    Map data = {
+      "id": id,
+      "name": name,
+      "detail": detail,
+    };
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + 'products');
+    http.Response response = await http.put(
+      url,
+      headers: headers,
+      body: body,
+    );
+    print(response.body);
+    return response;
+  }
+
+  static Future<http.Response> deleteproduct(int id) async {
+    Map data = {
+      "id": id,
+
+    };
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + 'products');
+    http.Response response = await http.put(
       url,
       headers: headers,
       body: body,
