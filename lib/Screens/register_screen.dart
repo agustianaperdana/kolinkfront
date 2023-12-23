@@ -20,6 +20,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   String _email = '';
   String _password = '';
+  String c_password = '';
   String _name = '';
 
   createAccountPressed() async {
@@ -28,7 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         .hasMatch(_email);
     if (emailValid) {
       http.Response response =
-          await AuthServices.register(_name, _email, _password);
+          await AuthServices.register(_name, _email, _password,c_password);
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 200) {
         Navigator.push(
@@ -97,6 +98,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 _password = value;
               },
             ),
+
+            TextField(
+              obscureText: true,
+              decoration: const InputDecoration(
+                hintText: 'Password',
+              ),
+              onChanged: (value) {
+                c_password = value;
+              },
+            ),
+
             const SizedBox(
               height: 40,
             ),
