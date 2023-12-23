@@ -22,14 +22,13 @@ class AuthServices {
     print(response.body);
     return response;
   }
-
   static Future<http.Response> login(String email, String password) async {
     Map data = {
       "email": email,
       "password": password,
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'login');
+    var url = Uri.parse(baseURL + 'v1/login');
     http.Response response = await http.post(
       url,
       headers: headers,
@@ -38,4 +37,20 @@ class AuthServices {
     print(response.body);
     return response;
   }
+  static Future<http.Response> product(String name, String detail) async {
+    Map data = {
+      "name": name,
+      "detail": detail,
+    };
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + 'products');
+    http.Response response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+    print(response.body);
+    return response;
+  }
+
 }
